@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitPass — Matrícula na academia</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>💪 FitPass</h1>
+  <p>Matrícula on-line da Academia Movimento</p>
+</header>
+<main>
+  <section class="card">
+    <h2>Seus dados</h2>
+    <form id="form-matricula" novalidate>
+      <label>Nome completo
+        <input id="nome" type="text" placeholder="Ex.: Bruno Lima">
+      </label>
+      <div class="linha">
+        <label>CPF
+          <input id="cpf" type="text" placeholder="000.000.000-00">
+        </label>
+        <label>Idade
+          <input id="idade" type="number" min="0">
+        </label>
+      </div>
+      <label class="check"><input id="autorizacao" type="checkbox"> Tenho autorização do responsável (menores de 18)</label>
+      <label class="check"><input id="estudante" type="checkbox"> Sou estudante (com carteirinha)</label>
+      <h2>Plano</h2>
+      <div class="planos">
+        <label class="plano"><input type="radio" name="plano" value="mensal" checked><strong>Mensal</strong><span>R$ 99,90</span></label>
+        <label class="plano"><input type="radio" name="plano" value="trimestral"><strong>Trimestral</strong><span>R$ 269,70</span></label>
+        <label class="plano"><input type="radio" name="plano" value="anual"><strong>Anual</strong><span>R$ 958,80</span></label>
+      </div>
+      <div class="botoes">
+        <button type="button" id="btn-simular" class="secundario">Simular valor</button>
+        <button type="submit">Confirmar matrícula</button>
+      </div>
+    </form>
+  </section>
+  <section class="card">
+    <h2>Resumo</h2>
+    <div class="resumo">
+      <p>Plano <span id="r-plano">—</span></p>
+      <p>Matrícula <span id="r-matricula">—</span></p>
+      <p>Desconto <span id="r-desconto">—</span></p>
+      <p class="total">Total a pagar <span id="r-total">—</span></p>
+    </div>
+    <p id="mensagem" class="mensagem" role="alert"></p>
+  </section>
+</main>
+<footer>FitPass v1.1 · Projeto da turma</footer>
+<script src="js/regras.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

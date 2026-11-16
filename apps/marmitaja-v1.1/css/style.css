@@ -1,0 +1,30 @@
+:root { --cor: #C2541B; --cor-escura: #8A3A10; --fundo: #FBF4EC; --texto: #1C2421; --erro: #B3261E; --ok: #C2541B; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--fundo); color: var(--texto); }
+header { background: var(--cor); color: #fff; padding: 20px 24px; }
+header h1 { margin: 0 0 4px; font-size: 28px; }
+header p { margin: 0; opacity: .9; }
+main { max-width: 980px; margin: 24px auto; padding: 0 16px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 900px) { main { grid-template-columns: 380px 1fr; align-items: start; } }
+.card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.card h2 { margin-top: 0; font-size: 20px; color: var(--cor-escura); }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+input, select { font: inherit; font-weight: 400; padding: 8px 10px; border: 1px solid #DCCBBB; border-radius: 8px; }
+.linha { display: flex; gap: 12px; } .linha label { flex: 1; }
+label.check { flex-direction: row; align-items: center; gap: 8px; font-weight: 400; }
+.botoes { display: flex; gap: 8px; }
+button { font: inherit; font-weight: 600; padding: 10px 16px; border: 0; border-radius: 8px; background: var(--cor); color: #fff; cursor: pointer; }
+button.secundario { background: #F5E3D3; color: var(--cor-escura); }
+button.cancelar { background: transparent; color: var(--erro); padding: 4px 8px; }
+.valor { font-size: 18px; font-weight: 700; color: var(--cor-escura); min-height: 1em; }
+.mensagem { min-height: 1em; font-weight: 600; }
+.mensagem.erro { color: var(--erro); } .mensagem.ok { color: var(--ok); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #EFE3D7; }
+.vazio { color: #6B7570; }
+footer { text-align: center; color: #6B7570; font-size: 13px; padding: 24px; }
+@media (min-width: 900px) { main { grid-template-columns: 1fr 1fr; } }
+.cardapio { display: flex; gap: 8px; margin-bottom: 16px; }
+.prato { flex: 1; background: var(--fundo); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.resumo p { display: flex; justify-content: space-between; margin: 6px 0; }
+.resumo .total { font-size: 20px; font-weight: 700; color: var(--cor-escura); border-top: 1px solid #EFE3D7; padding-top: 8px; }

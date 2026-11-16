@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuadraLivre — Reserva de quadras</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>🏐 QuadraLivre</h1>
+  <p>Reserve sua quadra no Centro Esportivo Bairro Novo</p>
+</header>
+<main>
+  <section class="card">
+    <h2>Nova reserva</h2>
+    <form id="form-reserva" novalidate>
+      <label>Nome do responsável
+        <input id="nome" type="text" placeholder="Ex.: Ana Souza">
+      </label>
+      <label>Telefone
+        <input id="telefone" type="text" placeholder="(85) 99999-1234">
+      </label>
+      <label>Quadra
+        <select id="quadra">
+          <option value="futsal">Futsal — R$ 80,00 por hora</option>
+          <option value="volei">Vôlei — R$ 60,00 por hora</option>
+          <option value="tenis">Tênis — R$ 70,00 por hora</option>
+        </select>
+      </label>
+      <label>Data
+        <input id="data" type="date">
+      </label>
+      <div class="linha">
+        <label>Início
+          <select id="inicio"></select>
+        </label>
+        <label>Duração (horas)
+          <input id="duracao" type="number" value="1" min="1">
+        </label>
+      </div>
+      <label class="check"><input id="socio" type="checkbox"> Sou sócio do Centro Esportivo</label>
+      <div class="botoes">
+        <button type="button" id="btn-calcular" class="secundario">Calcular valor</button>
+        <button type="submit" id="btn-reservar">Reservar</button>
+      </div>
+      <p id="valor" class="valor"></p>
+      <p id="mensagem" class="mensagem" role="alert"></p>
+    </form>
+  </section>
+  <section class="card">
+    <h2>Minhas reservas</h2>
+    <table id="tabela">
+      <thead><tr><th>Data</th><th>Horário</th><th>Quadra</th><th>Responsável</th><th>Valor</th><th></th></tr></thead>
+      <tbody id="lista"></tbody>
+    </table>
+    <p id="vazio" class="vazio">Nenhuma reserva ainda.</p>
+  </section>
+</main>
+<footer>QuadraLivre v1.0 · Projeto da turma</footer>
+<script src="js/regras.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

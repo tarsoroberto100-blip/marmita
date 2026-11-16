@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuadraLivre — Testes das regras</title>
+<style>
+  body { font-family: "Segoe UI", Arial, sans-serif; background: #F2F5F1; color: #1C2421; margin: 0; padding: 24px; }
+  h1 { margin: 0 0 4px; color: #145236; }
+  .resumo { font-size: 20px; font-weight: 700; margin: 12px 0 20px; }
+  .ok { color: #1F7A4D; } .falha { color: #B3261E; }
+  table { width: 100%; max-width: 1000px; border-collapse: collapse; background: #fff; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #E3E8E5; font-size: 14px; vertical-align: top; }
+  th { background: #E1EAE4; }
+  code { font-family: Consolas, monospace; }
+  .nota { max-width: 1000px; margin-top: 16px; font-size: 14px; color: #4A5550; }
+</style>
+</head>
+<body>
+<h1>QuadraLivre — testes automatizados das regras</h1>
+<p>Recarregue esta página (F5) depois de cada correção no <code>js/regras.js</code>.</p>
+<p id="resumo" class="resumo"></p>
+<table>
+  <thead><tr><th>#</th><th>Regra</th><th>Teste</th><th>Esperado</th><th>Obtido</th><th>Resultado</th></tr></thead>
+  <tbody id="resultados"></tbody>
+</table>
+<p class="nota">A RNF01 (a reserva continua depois do F5) depende da tela e não entra aqui: confira à mão no <code>index.html</code>.</p>
+<script src="../js/regras.js"></script>
+<script>
+const testes = [
+  ['RN01', 'nome "Ana Souza" é aceito', () => validarNome('Ana Souza'), true],
+  ['RN01', 'nome "Al" (2 letras) é recusado', () => validarNome('Al'), false],
+  ['RN02', 'telefone com 11 números é aceito', () => validarTelefone('(85) 99999-1234'), true],
+  ['RN02', 'telefone com 10 números é recusado', () => validarTelefone('(85) 9999-1234'), false],
+  ['RN03', 'início 20:00 com 2 horas é aceito', () => validarHorario(20, 2), true],
+  ['RN03', 'início 21:00 com 2 horas é recusado', () => validarHorario(21, 2), false],
+  ['RN03', 'duração de 3 horas é aceita', () => validarHorario(10, 3), true],
+  ['RN03', 'duração de 4 horas é recusada', () => validarHorario(10, 4), false],
+  ['RN04', 'vôlei 10:00, 2 horas, sócio = 108', () => valorReserva('volei', 10, 2, true), 108],
+  ['RN05', 'futsal 17:00 às 19:00 = 180 (exemplo do documento)', () => valorReserva('futsal', 17, 2, false), 180],
+  ['RN05', 'futsal 18:00, 1 hora = 100', () => valorReserva('futsal', 18, 1, false), 100],
+  ['RN07', 'futsal 18–20 e futsal 19–20, mesmo dia: conflito', () => temConflito([{ quadra: 'futsal', data: '2026-11-20', inicio: 18, duracao: 2 }], { quadra: 'futsal', data: '2026-11-20', inicio: 19, duracao: 1 }), true],
+  ['RN07', 'futsal 16–18 e futsal 18–19: sem conflito', () => temConflito([{ quadra: 'futsal', data: '2026-11-20', inicio: 16, duracao: 2 }], { quadra: 'futsal', data: '2026-11-20', inicio: 18, duracao: 1 }), false],
+  ['RN07', 'futsal 18–20 e vôlei 18–20: sem conflito', () => temConflito([{ quadra: 'futsal', data: '2026-11-20', inicio: 18, duracao: 2 }], { quadra: 'volei', data: '2026-11-20', inicio: 18, duracao: 2 }), false]
+];
+let passou = 0;
+const corpo = document.getElementById('resultados');
+testes.forEach(([regra, nome, agir, esperado], i) => {
+  let obtido;
+  try { obtido = agir(); } catch (e) { obtido = 'erro: ' + e.message; }
+  const ok = obtido === esperado;
+  if (ok) passou++;
+  const tr = document.createElement('tr');
+  [String(i + 1), regra, nome, String(esperado), String(obtido)].forEach(t => {
+    const td = document.createElement('td'); td.textContent = t; tr.appendChild(td);
+  });
+  const td = document.createElement('td');
+  td.textContent = ok ? 'Passou' : 'Falhou';
+  td.className = ok ? 'ok' : 'falha';
+  tr.appendChild(td);
+  corpo.appendChild(tr);
+});
+const resumo = document.getElementById('resumo');
+resumo.textContent = passou + ' de ' + testes.length + ' testes passaram';
+resumo.className = 'resumo ' + (passou === testes.length ? 'ok' : 'falha');
+</script>
+</body>
+</html>
